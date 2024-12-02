@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tan-dara5304-next-gitlab-deployment
+  labels:
+    app: tan-dara5304-next-gitlab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tan-dara5304-next-gitlab
+  template:
+    metadata:
+      labels:
+        app: tan-dara5304-next-gitlab
+    spec:
+      containers:
+        - name: tan-dara5304-next-gitlab-container
+          image: pipejet/tan-dara5304-next-gitlab:0
+          ports:
+            - containerPort: 3000
