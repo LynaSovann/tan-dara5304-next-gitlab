@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tan-dara5304-next-gitlab-https-ingress
+  namespace: tan-dara5304-next-gitlab
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - tan-dara5304-next-gitlab.assessify.org
+      secretName: tan-dara5304-next-gitlab-secret-tls
+  rules:
+    - host: tan-dara5304-next-gitlab.assessify.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: tan-dara5304-next-gitlab-service
+                port:
+                  number: 8325
